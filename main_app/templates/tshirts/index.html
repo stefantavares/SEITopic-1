@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+
+{% block title %}
+<title>SEITopic - Make your Selections!</title>
+{% endblock %}
+
 {% block content%}
 
 <h1>Tshirts</h1>
@@ -24,7 +29,7 @@
                 <h5 class="card-title">{{ tshirt.name }}</h5>
                 <!-- <p class="card-text">{{ tshirt.description }}</p> -->
                 <p class="card-text">${{ tshirt.price }}</p>
-                <a href="#" class="btn btn-primary">Details</a>
+                <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary">Details</a>
             </div>
         </div>
     </div>

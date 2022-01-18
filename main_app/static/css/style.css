@@ -128,3 +128,47 @@ footer {
     align-items: center;
     justify-content: space-evenly;
 }
+
+/* Lines added by Chris */
+#logos {
+    height: 100px;
+    width: auto;
+  }
+  
+  #logoRow {
+    height: 50px;
+    width: auto;
+    float: left;
+  ;
+  }
+
+#details-container{
+  display: flex;
+  justify-content: center;
+}
+
+.tshirt-img{
+  width:200px;
+  height:200px;
+  border:1px solid;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.center-column{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+}
+
+.card-title{
+  margin: 0px 0px 20px 0px;
+}
+
+.card-text{
+  margin: 10px 0px 10px 0px;
+}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{ tshirt.name }} : {{ tshirt.description }}</title>
+{% endblock%}
+
+
+{% block content%}
+<div class="container justify-content-md-center" id="details-container">
+    <div class="row clearfix">
+        <div class="col">
+            <div class="card center" style= "width:500px";>
+                <div class="card-body">
+                    <div class="center-column">
+                    <h5 class="card-title">{{ tshirt.name }}</h5>
+                    
+                    <div class="tshirt-img">
+                    <img src="tshirt.image" alt="{{ tshirt.name }} : {{ tshirt.description }}">
+                    <p>Click image for larger view</p>
+                    </div>
+                </div>
+
+                    
+                    <p class="card-text">{{ tshirt.description }}</p>
+                    <p class="card-text">${{ tshirt.price }}</p>
+
+                    
+                    <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary">Add to Cart</a>
+                    <hr>
+                    <p><a href="{% url 'tshirts_index'  %}" class="btn btn-primary">Return to TShirts</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}
