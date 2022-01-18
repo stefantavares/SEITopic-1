@@ -24,7 +24,11 @@
                     <p class="card-text">${{ tshirt.price }}</p>
 
                     
-                    <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary">Add to Cart</a>
+                    <form action="{% url 'add_tshirt' tshirt.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary" value="Add to Cart">
+                        {{ form.as_p }}
+                    </form>
                     <hr>
                     <p><a href="{% url 'tshirts_index'  %}" class="btn btn-primary">Return to TShirts</a></p>
                 </div>
