@@ -84,6 +84,17 @@ def show_cart(request):
   order = request.user.profile.order_set.get(complete=False)
   order_details = OrderDetail.objects.filter(order=order)
   return render(request, 'tshirts/cart.html', {'order': order, 'order_details': order_details})
+
+def complete_order(request):
+   order = request.user.profile.order_set.get(complete=False)
+   order.complete = True
+   order.save()
+   return redirect('show_orders')
+
+def show_orders(request):
+  user = request.user
+  orders = user.profile.order_set.filter(complete=True)
+  return render(request, 'tshirts/orderhistory.html', {'user': user, 'orders': orders })
   
 
 

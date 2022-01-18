@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>SEITopic Order History</title>
+{% endblock %}
+
+{% block content%}
+<h1>Order History for {{ user.username }}</h1>
+
+<hr>
+<div class="container center">
+    <div id="orders-container" style="width:500px;" class="card">
+        <div class="card-body">
+        {% for order in orders %}
+        <div class="flexrow-spc-btwn">
+        <h5>Order #: {{ order.id }}</h5>
+        <a class="btn btn-primary" href="#">Review Order</a>
+        </div>
+        <hr>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

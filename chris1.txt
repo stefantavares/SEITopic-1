@@ -1,1 +1,4 @@
-Just for adding a file
+CORS:
+https://dzone.com/articles/how-to-fix-django-cors-error
+
+and pip3 install django-cors-headers

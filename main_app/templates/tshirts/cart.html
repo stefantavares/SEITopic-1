@@ -6,7 +6,7 @@
 
 {% block content%}
 <h1>Shopping Cart Landing Page</h1>
-
+<hr>
 <div class="container justify-content-md-center" id="details-container">
     <div class="row clearfix">
         <div class="col">
@@ -29,8 +29,9 @@
                     <hr>
 
                     
-                    <form action="" method="POST">
+                    <form action="{% url 'complete_order' %}" method="POST">
                         {% csrf_token %}
+                        <p class="total-container"><button class="btn btn-primary" type="submit">Complete order</button></p>    
                     </form>
                     <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary">Return to T Shirts</a></p>
                 </div>
