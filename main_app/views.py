@@ -1,3 +1,7 @@
+import os 
+import json
+from django.http import HttpResponse
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -30,3 +34,14 @@ def tshirts_index(request):
     tshirts = Tshirt.objects.all()
     return render(request, 'tshirts/index.html', {'tshirts': tshirts})
 
+def tshirts_detail(request, tshirt_id):
+    tshirt = Tshirt.objects.get(id=tshirt_id)
+    return render(request, 'tshirts/detail.html', {
+      'tshirt': tshirt
+    })
+
+def myimages(request):
+    image_path = os.path.dirname(os.path.realpath(__file__))
+    images = os.listdir(image_path+"/static/images/logos")
+    json_string = json.dumps(images)
+    return HttpResponse(json_string)

@@ -1,6 +1,7 @@
 from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 
@@ -9,6 +10,12 @@ class Tshirt(models.Model):
     description = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=4, decimal_places=2)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('tshirts_detail', kwargs={'tshirt_id': self.id})
+        
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=20)
