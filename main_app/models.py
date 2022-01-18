@@ -24,7 +24,7 @@ class Profile(models.Model):
     zipcode = models.IntegerField()
 
 class Order(models.Model):
-    total_cost: models.DecimalField(max_digits=5, decimal_places=2)
+    total_cost= models.DecimalField(max_digits=5, decimal_places=2, default=0)
     date = models.DateField()
     complete = models.BooleanField(default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)

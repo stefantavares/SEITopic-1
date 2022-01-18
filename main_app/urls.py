@@ -7,4 +7,5 @@ urlpatterns = [
     path('tshirts/', views.tshirts_index, name='tshirts_index'),
     path('tshirts/<int:tshirt_id>/', views.tshirts_detail, name='tshirts_detail'),
     path('myimages',views.myimages,name='myimages'),
+    path('tshirts/<int:tshirt_id>/add_tshirt', views.add_tshirt, name = 'add_tshirt')
 ]
