@@ -199,3 +199,14 @@ footer {
   display: flex;
   flex-direction: row;
 }
+
+.flexrow-spc-btwn{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+#orders-container{
+  width: 500px;
+}
+
