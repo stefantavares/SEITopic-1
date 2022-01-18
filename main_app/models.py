@@ -31,6 +31,6 @@ class Order(models.Model):
     tshirts = models.ManyToManyField(Tshirt, through='OrderDetail')
 
 class OrderDetail(models.Model):
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     tshirt = models.ForeignKey(Tshirt, on_delete=models.CASCADE)

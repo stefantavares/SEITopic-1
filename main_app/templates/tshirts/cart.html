@@ -7,4 +7,36 @@
 {% block content%}
 <h1>Shopping Cart Landing Page</h1>
 
+<div class="container justify-content-md-center" id="details-container">
+    <div class="row clearfix">
+        <div class="col">
+            <div class="card center" style= "width:500px";>
+                <div class="card-body cart-card">
+                    <div class="center-column">
+                    <h5 class="card-title"></h5>
+                    </div>
+                    {% for tshirt in order_details %}
+                    <div class="flex-row">
+                        <div class="cart-items">
+                            <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
+                            <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
+                            <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    <h5 class="total-container">Total: $100.00</h5>
+                    <hr>
+
+                    
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                    </form>
+                    <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary">Return to T Shirts</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -26,8 +26,8 @@
                     
                     <form action="{% url 'add_tshirt' tshirt.id %}" method="POST">
                         {% csrf_token %}
-                        <input type="submit" class="btn btn-primary" value="Add to Cart">
                         {{ form.as_p }}
+                        <input type="submit" class="btn btn-primary" value="Add to Cart">
                     </form>
                     <hr>
                     <p><a href="{% url 'tshirts_index'  %}" class="btn btn-primary">Return to TShirts</a></p>
