@@ -60,6 +60,11 @@ def add_tshirt(request, tshirt_id):
     order = request.user.profile.order_set.get(complete=False)
     order_form = OrderDetailForm(request.POST)
     if order_form.is_valid():
+      if OrderDetail.objects.filter(order=order, tshirt=tshirt).count():
+        order_details = OrderDetail.objects.get(order=order, tshirt=tshirt)
+        order_details.quantity += order_form.save(commit=False).quantity
+        order_details.save()
+        return redirect('tshirts_detail',tshirt_id = tshirt_id)
       order_details = order_form.save(commit=False)
       order_details.order = order
       order_details.tshirt = tshirt
@@ -74,4 +79,11 @@ def add_tshirt(request, tshirt_id):
     order_details.save()
     return redirect('tshirts_detail',tshirt_id = tshirt_id)
     
+def show_cart(request):
+  user = request.user
+  order = request.user.profile.order_set.get(complete=False)
+  order_details = OrderDetail.objects.filter(order=order)
+  return render(request, 'tshirts/cart.html', {'order': order, 'order_details': order_details})
+  
+
 

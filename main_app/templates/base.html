@@ -23,7 +23,7 @@
                 <li class="nav-link"><a href="{% url 'tshirts_index' %}">T Shirts</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-link"><a href="#">Order History</a></li>
-                <li class="nav-link"><a href="#">Shopping Cart &nbsp;<i class="far fa-shopping-cart"></i></a></li>
+                <li class="nav-link"><a href="{% url 'show_cart' %}">Shopping Cart &nbsp;<i class="far fa-shopping-cart"></i></a></li>
                 {% endif %}
             </ul>
         </nav>

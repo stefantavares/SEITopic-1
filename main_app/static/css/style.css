@@ -172,3 +172,30 @@ footer {
 .card-text{
   margin: 10px 0px 10px 0px;
 }
+
+.cart-card {
+  width: 450px;
+}
+
+.total-container {
+  display: flex;
+  flex-direction: row;
+  width: 418px;
+  justify-content: flex-end;
+}
+
+/* .cart-spacing {
+  margin: 0px 25px 0px 25px;
+} */
+
+.cart-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 450px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
