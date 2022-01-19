@@ -8,18 +8,6 @@
 
 <h1>Tshirts</h1>
 <hr>
-<!-- <div class="container">
-    <div class="row clearfix">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Shirt Title</h5>
-                <p class="card-text">Shirt Details</p>
-                <a href="#" class="btn btn-primary">Details</a>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="container">
     <div class="row clearfix">
         {% for tshirt in tshirts %}
@@ -27,7 +15,6 @@
         <div class="card" style="height: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{ tshirt.name }}</h5>
-                <!-- <p class="card-text">{{ tshirt.description }}</p> -->
                 <p class="card-text">${{ tshirt.price }}</p>
                 <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary">Details</a>
             </div>
@@ -40,7 +27,5 @@
         {% endfor %}
     </div>
 </div>
-
-
 
 {% endblock %}

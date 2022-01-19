@@ -17,17 +17,18 @@
                     <img src="tshirt.image" alt="{{ tshirt.name }} : {{ tshirt.description }}">
                     <p>Click image for larger view</p>
                     </div>
-                </div>
-
-                    
+                    </div>
                     <p class="card-text">{{ tshirt.description }}</p>
                     <p class="card-text">${{ tshirt.price }}</p>
-
-                    
                     <form action="{% url 'add_tshirt' tshirt.id %}" method="POST">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        <div>
+                        <label for="id_quantity">Quantity:</label>
+                        <input type="number" name="quantity" value="1" required class="quantity-input">
+                        </div>
+                        <br>
                         <input type="submit" class="btn btn-primary" value="Add to Cart">
+                        
                     </form>
                     <hr>
                     <p><a href="{% url 'tshirts_index'  %}" class="btn btn-primary">Return to TShirts</a></p>

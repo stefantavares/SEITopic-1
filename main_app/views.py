@@ -68,14 +68,14 @@ def add_tshirt(request, tshirt_id):
         order_details.save()
         order.total_cost += order_form.save(commit=False).quantity*tshirt.price
         order.save()
-        return redirect('tshirts_detail',tshirt_id = tshirt_id)
+        return redirect('show_cart')
       order_details = order_form.save(commit=False)
       order_details.order = order
       order_details.tshirt = tshirt
       order_details.save()
       order.total_cost += order_details.quantity*tshirt.price
       order.save()
-      return redirect('tshirts_detail',tshirt_id = tshirt_id)
+      return redirect('show_cart')
   order = Order.objects.create(date = date.today(), user= request.user.profile)
   order_form = OrderDetailForm(request.POST)
   if order_form.is_valid():
@@ -85,7 +85,7 @@ def add_tshirt(request, tshirt_id):
     order_details.save()
     order.total_cost += order_details.quantity*tshirt.price
     order.save()
-    return redirect('tshirts_detail',tshirt_id = tshirt_id)
+    return redirect('show_cart')
 
 @login_required    
 def show_cart(request):
@@ -126,5 +126,11 @@ def remove_item(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
   order_details.delete()
   return redirect('show_cart')
+
+@login_required
+def cancel_order(request, order_id):
+  order = Order.objects.get(id=order_id)
+  order.delete()
+  return redirect('show_orders')
 
 
