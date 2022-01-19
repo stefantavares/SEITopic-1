@@ -5,14 +5,12 @@
 {% endblock %}
 
 {% block content%}
-<h1>Shopping Cart Landing Page</h1>
+<h1>Shopping Cart</h1>
 <hr>
-<div class="container justify-content-md-center" id="details-container">
-    <div class="row clearfix">
-        <div class="col">
+{% if order_details.count %}
+<div class="container" id="details-container">
             <div class="card center" style= "width:700px;">
                 <div class="card-body" id="orders-card">
-                    {% if order_details.count %}
                     {% for tshirt in order_details %}
                     
                     <div class="flex-row">
@@ -46,14 +44,12 @@
                         {% csrf_token %}
                         <p class="total-container"><button class="btn btn-primary" type="submit">Complete order</button></p>    
                     </form>
-                    {% else %}
-                    <h2>There is nothing in your cart.</h2>
-                    {% endif %}
                     <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary">Return to T Shirts</a></p>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
+        
+        {% else %}
+        <h4 class="center display-message">There is nothing in your cart.</h4>
+        {% endif %}
 {% endblock %}

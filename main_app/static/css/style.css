@@ -236,3 +236,11 @@ footer {
   display: flex;
   justify-content: flex-start;
 }
+
+.username {
+  color: rgba(0, 136, 169, 1);
+}
+
+.display-message {
+  margin: 50px 0px 0px 0px;
+}
