@@ -110,6 +110,17 @@ def show_orders(request):
   user = request.user
   orders = user.profile.order_set.filter(complete=True)
   return render(request, 'tshirts/orderhistory.html', {'user': user, 'orders': orders })
+
+@login_required
+def update_quantity(request, order_details_id):
+  order_details = OrderDetail.objects.get(id=order_details_id)
+  update_form = OrderDetailForm(request.POST)
+  order_details.order.total_cost += order_details.tshirt.price*(update_form.save(commit=False).quantity - order_details.quantity)
+  order_details.order.save()
+  order_details.quantity = update_form.save(commit=False).quantity
+  order_details.save()
+  return redirect('show_cart')
+
   
 
 
