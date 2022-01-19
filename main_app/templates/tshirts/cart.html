@@ -15,7 +15,9 @@
                     <div class="center-column">
                     <h5 class="card-title"></h5>
                     </div>
+                    {% if order_details.count %}
                     {% for tshirt in order_details %}
+                    
                     <div class="flex-row">
                         <div class="cart-items">
                             <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
@@ -33,6 +35,9 @@
                         {% csrf_token %}
                         <p class="total-container"><button class="btn btn-primary" type="submit">Complete order</button></p>    
                     </form>
+                    {% else %}
+                    <h2>There is nothing in your cart.</h2>
+                    {% endif %}
                     <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary">Return to T Shirts</a></p>
                 </div>
             </div>
