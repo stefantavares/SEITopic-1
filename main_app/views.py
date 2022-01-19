@@ -124,6 +124,8 @@ def update_quantity(request, order_details_id):
 @login_required
 def remove_item(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
+  order_details.order.total_cost -= order_details.quantity*order_details.tshirt.price
+  order_details.order.save()
   order_details.delete()
   return redirect('show_cart')
 
@@ -132,5 +134,11 @@ def cancel_order(request, order_id):
   order = Order.objects.get(id=order_id)
   order.delete()
   return redirect('show_orders')
+
+@login_required
+def order_detail(request, order_id):
+  order = Order.objects.get(id=order_id)
+  order_details = OrderDetail.objects.filter(order = order)
+  return render(request, 'tshirts/orderdetail.html', {'order': order, 'order_details': order_details})
 
 
