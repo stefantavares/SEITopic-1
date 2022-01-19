@@ -27,12 +27,14 @@
                 {% endif %}
             </ul>
         </nav>
+        <div id="auth-buttons">
         {% if user.is_authenticated %}
         <a class="login-button" href="{% url 'logout' %}">Log Out&nbsp;&nbsp;<i id="orders-icon" class="far fa-user"></i></a>
         {% else %}
         <a class="login-button" href="{% url 'login' %}">Log In&nbsp;&nbsp;<i id="login-icon" class="far fa-user"></i></a>
         <a class="login-button" href="{% url 'signup' %}">Sign Up&nbsp;&nbsp;<i id="orders-icon" class="far fa-user-plus"></i></a>
         {% endif %}
+        </div>
     </header>
 <main>
     <!-- <nav class="navbar">

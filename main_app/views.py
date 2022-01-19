@@ -6,6 +6,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .models import Tshirt, Order, OrderDetail
 from .forms import ProfileForm, OrderDetailForm
 from datetime import date
@@ -54,6 +55,7 @@ def myimages(request):
     json_string = json.dumps(images)
     return HttpResponse(json_string)
 
+@login_required
 def add_tshirt(request, tshirt_id):
   tshirt = Tshirt.objects.get(id=tshirt_id)
   if request.user.profile.order_set.filter(complete=False).count():
@@ -64,11 +66,15 @@ def add_tshirt(request, tshirt_id):
         order_details = OrderDetail.objects.get(order=order, tshirt=tshirt)
         order_details.quantity += order_form.save(commit=False).quantity
         order_details.save()
+        order.total_cost += order_form.save(commit=False).quantity*tshirt.price
+        order.save()
         return redirect('tshirts_detail',tshirt_id = tshirt_id)
       order_details = order_form.save(commit=False)
       order_details.order = order
       order_details.tshirt = tshirt
       order_details.save()
+      order.total_cost += order_details.quantity*tshirt.price
+      order.save()
       return redirect('tshirts_detail',tshirt_id = tshirt_id)
   order = Order.objects.create(date = date.today(), user= request.user.profile)
   order_form = OrderDetailForm(request.POST)
@@ -77,8 +83,11 @@ def add_tshirt(request, tshirt_id):
     order_details.order = order
     order_details.tshirt = tshirt
     order_details.save()
+    order.total_cost += order_details.quantity*tshirt.price
+    order.save()
     return redirect('tshirts_detail',tshirt_id = tshirt_id)
-    
+
+@login_required    
 def show_cart(request):
   user = request.user
   if user.profile.order_set.filter(complete=False).count():
@@ -89,12 +98,14 @@ def show_cart(request):
   order_details = OrderDetail.objects.filter(order=order)
   return render(request, 'tshirts/cart.html', {'order': order, 'order_details': order_details})
 
+@login_required
 def complete_order(request):
    order = request.user.profile.order_set.get(complete=False)
    order.complete = True
    order.save()
    return redirect('show_orders')
 
+@login_required
 def show_orders(request):
   user = request.user
   orders = user.profile.order_set.filter(complete=True)
