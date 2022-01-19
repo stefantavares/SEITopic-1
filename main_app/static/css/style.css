@@ -79,6 +79,7 @@ li, a {
     cursor: pointer;
     font-size: 12px;
     font-weight: 400;
+    margin: 0px 6px 0px 6px;
 }
 
 .login-button:hover {
@@ -210,3 +211,7 @@ footer {
   width: 500px;
 }
 
+#auth-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
