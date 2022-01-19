@@ -121,6 +121,10 @@ def update_quantity(request, order_details_id):
   order_details.save()
   return redirect('show_cart')
 
-  
+@login_required
+def remove_item(request, order_details_id):
+  order_details = OrderDetail.objects.get(id=order_details_id)
+  order_details.delete()
+  return redirect('show_cart')
 
 
