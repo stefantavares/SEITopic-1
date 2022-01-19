@@ -177,7 +177,7 @@ footer {
 .total-container {
   display: flex;
   flex-direction: row;
-  width: 720px;
+  width: 620px;
   justify-content: flex-end;
 }
 
@@ -189,7 +189,7 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 725px;
+  width: 650px;
 }
 
 .flex-row {
@@ -213,11 +213,26 @@ footer {
 }
 
 #cart-card {
-  width: 750px;
+  width: 650px;
   display: flex;
   justify-content: space-between;
 }
 
 .quantity-input {
-  width: 40px
+  width: 40px;
+}
+
+#orders-card {
+  width: 650px;
+}
+
+.quantity {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.quantity-edit {
+  display: flex;
+  justify-content: flex-start;
 }

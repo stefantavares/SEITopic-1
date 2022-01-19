@@ -10,8 +10,8 @@
 <div class="container justify-content-md-center" id="details-container">
     <div class="row clearfix">
         <div class="col">
-            <div class="card center" style= "width:800px;">
-                <div class="card-body">
+            <div class="card center" style= "width:700px;">
+                <div class="card-body" id="orders-card">
                     {% if order_details.count %}
                     {% for tshirt in order_details %}
                     
@@ -21,14 +21,19 @@
                             <div class="quantity">
                             <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
                             <div>
+                                <div class="quantit-edit">
                                 <form action="{% url 'update_quantity' tshirt.id %}" method="POST">
                                     {% csrf_token %}
                                     <input type="number" name="quantity" value="{{ tshirt.quantity }}" required class="quantity-input">
                                     <input type="submit" class="btn btn-sm btn-primary" value="Update">
                                 </form>
+                                </div>
                             </div>
                         </div>
+                        <div>
                             <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
+                            <a href="{% url 'remove_item' tshirt.id %}" class="btn btn-sm btn-danger" >Remove Item</a>
+                        </div>
                         </div>
                     </div>
                     <hr>
