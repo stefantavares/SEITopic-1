@@ -7,6 +7,6 @@ class ProfileForm(ModelForm):
     fields = ['street_address', 'city', 'state', 'zipcode']
 
 class OrderDetailForm(ModelForm):
-    class Meta:
-        model= OrderDetail
-        fields=['quantity']
+  class Meta:
+    model= OrderDetail
+    fields=['quantity']

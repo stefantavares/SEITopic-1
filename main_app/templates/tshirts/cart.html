@@ -10,18 +10,24 @@
 <div class="container justify-content-md-center" id="details-container">
     <div class="row clearfix">
         <div class="col">
-            <div class="card center" style= "width:500px";>
-                <div class="card-body cart-card">
-                    <div class="center-column">
-                    <h5 class="card-title"></h5>
-                    </div>
+            <div class="card center" style= "width:800px;">
+                <div class="card-body">
                     {% if order_details.count %}
                     {% for tshirt in order_details %}
                     
                     <div class="flex-row">
                         <div class="cart-items">
                             <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
+                            <div class="quantity">
                             <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
+                            <div>
+                                <form action="{% url 'update_quantity' tshirt.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="{{ tshirt.quantity }}" required class="quantity-input">
+                                    <input type="submit" class="btn btn-sm btn-primary" value="Update">
+                                </form>
+                            </div>
+                        </div>
                             <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
                         </div>
                     </div>

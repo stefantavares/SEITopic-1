@@ -174,14 +174,10 @@ footer {
   margin: 10px 0px 10px 0px;
 }
 
-.cart-card {
-  width: 450px;
-}
-
 .total-container {
   display: flex;
   flex-direction: row;
-  width: 418px;
+  width: 720px;
   justify-content: flex-end;
 }
 
@@ -193,7 +189,7 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 450px;
+  width: 725px;
 }
 
 .flex-row {
@@ -214,4 +210,14 @@ footer {
 #auth-buttons {
   display: flex;
   justify-content: flex-end;
+}
+
+#cart-card {
+  width: 750px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantity-input {
+  width: 40px
 }
