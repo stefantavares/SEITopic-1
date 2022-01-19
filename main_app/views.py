@@ -81,7 +81,11 @@ def add_tshirt(request, tshirt_id):
     
 def show_cart(request):
   user = request.user
-  order = request.user.profile.order_set.get(complete=False)
+  if user.profile.order_set.filter(complete=False).count():
+    order = request.user.profile.order_set.get(complete=False)
+    order_details = OrderDetail.objects.filter(order=order)
+    return render(request, 'tshirts/cart.html', {'order': order, 'order_details': order_details})
+  order = Order.objects.create(date = date.today(), user= request.user.profile)
   order_details = OrderDetail.objects.filter(order=order)
   return render(request, 'tshirts/cart.html', {'order': order, 'order_details': order_details})
 
