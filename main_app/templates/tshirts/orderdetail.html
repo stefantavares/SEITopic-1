@@ -11,13 +11,21 @@
             <div class="card center" style= "width:700px;">
                 <div class="card-body" id="orders-card">
                     {% for tshirt in order_details %}                  
+                    <div class="row">
                     <div class="flex-row">
                         <div class="cart-items">
-                            <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
+                            <div class="col">
+                            <p class="card-text cart-spacing item-name">{{ tshirt.tshirt.name }}</p>
+                            </div>  
+                            <div class="col">
                             <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
+                            </div>
+                            <div class="col" id="price-remove">
                             <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
+                            </div>
                         </div>
                     </div>
+                </div>
                     <hr>
                     {% endfor %}
                     <h5 class="total-container">Total: ${{ order.total_cost }}</h5>
@@ -27,7 +35,7 @@
                     <p>City: {{ order.user.city }}</p>
                     <p>State: {{ order.user.state }}</p>
                     <p>Zipcode: {{ order.user.zipcode }}</p>
-                    <p class="total-container"><a href="{% url 'show_orders' %}" class="btn btn-primary">Return to Order History</a></p>
+                    <p class="total-container"><a href="{% url 'show_orders' %}" class="btn btn-style-1 btn-primary">RETURN TO ORDER HISTORY</a></p>
                 </div>
             </div>
         </div>

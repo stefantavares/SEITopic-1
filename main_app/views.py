@@ -39,51 +39,59 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def tshirts_index(request):
-    tshirts = Tshirt.objects.all()
-    return render(request, 'tshirts/index.html', {'tshirts': tshirts})
+  tshirts = Tshirt.objects.all()
+  return render(request, 'tshirts/index.html', {'tshirts': tshirts})
 
 def tshirts_detail(request, tshirt_id):
-    tshirt = Tshirt.objects.get(id=tshirt_id)
-    reviews = tshirt.review_set.all()
-    return render(request, 'tshirts/detail.html', {'tshirt': tshirt, 'reviews': reviews})
-
-def myimages(request):
-    image_path = os.path.dirname(os.path.realpath(__file__))
-    images = os.listdir(image_path+"/static/images/logos")
-    json_string = json.dumps(images)
-    return HttpResponse(json_string)
+  tshirt = Tshirt.objects.get(id=tshirt_id)
+  reviews = tshirt.review_set.all()
+  return render(request, 'tshirts/detail.html', {'tshirt': tshirt, 'reviews': reviews})
 
 @login_required
 def add_tshirt(request, tshirt_id):
   tshirt = Tshirt.objects.get(id=tshirt_id)
+  #check if user already has cart-type order
   if request.user.profile.order_set.filter(complete=False).count():
+    #grab cart order
     order = request.user.profile.order_set.get(complete=False)
     order_form = OrderDetailForm(request.POST)
     if order_form.is_valid():
+      #check if user already has this item in their cart
       if OrderDetail.objects.filter(order=order, tshirt=tshirt).count():
         order_details = OrderDetail.objects.get(order=order, tshirt=tshirt)
+        #update quantity on item already in cart
         order_details.quantity += order_form.save(commit=False).quantity
         order_details.save()
+        #update total cost
         order.total_cost += order_form.save(commit=False).quantity*tshirt.price
         order.save()
         return redirect('show_cart')
+      # create item in cart
       order_details = order_form.save(commit=False)
+      #assign appropriate order model and shirt to details
       order_details.order = order
       order_details.tshirt = tshirt
       order_details.save()
+      #update total cost
       order.total_cost += order_details.quantity*tshirt.price
       order.save()
       return redirect('show_cart')
+  #create cart order if one doesn't exist
   order = Order.objects.create(date = date.today(), user= request.user.profile)
   order_form = OrderDetailForm(request.POST)
   if order_form.is_valid():
+    # create item in cart
     order_details = order_form.save(commit=False)
+    #assign appropriate order model and shirt to details
     order_details.order = order
     order_details.tshirt = tshirt
     order_details.save()
+    #update total cost
     order.total_cost += order_details.quantity*tshirt.price
     order.save()
     return redirect('show_cart')
+  #if all checks fail keep them on tshirt page
+  return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
 @login_required    
 def show_cart(request):
@@ -98,10 +106,10 @@ def show_cart(request):
 
 @login_required
 def complete_order(request):
-   order = request.user.profile.order_set.get(complete=False)
-   order.complete = True
-   order.save()
-   return redirect('show_orders')
+  order = request.user.profile.order_set.get(complete=False)
+  order.complete = True
+  order.save()
+  return redirect('show_orders')
 
 @login_required
 def show_orders(request):
@@ -165,4 +173,9 @@ def remove_review(request, tshirt_id, review_id):
     return redirect('tshirts_detail', tshirt_id = tshirt_id)
   return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
+def myimages(request):
+  image_path = os.path.dirname(os.path.realpath(__file__))
+  images = os.listdir(image_path+"/static/images/logos")
+  json_string = json.dumps(images)
+  return HttpResponse(json_string)
 
