@@ -114,11 +114,12 @@ def update_quantity(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
   if order_details.order.user.user == request.user:
     update_form = OrderDetailForm(request.POST)
-    order_details.order.total_cost += order_details.tshirt.price*(update_form.save(commit=False).quantity - order_details.quantity)
-    order_details.order.save()
-    order_details.quantity = update_form.save(commit=False).quantity
-    order_details.save()
-    return redirect('show_cart')
+    if update_form.is_valid():
+      order_details.order.total_cost += order_details.tshirt.price*(update_form.save(commit=False).quantity - order_details.quantity)
+      order_details.order.save()
+      order_details.quantity = update_form.save(commit=False).quantity
+      order_details.save()
+      return redirect('show_cart')
   return redirect('show_cart')
 
 @login_required
@@ -148,11 +149,12 @@ def order_detail(request, order_id):
 @login_required
 def add_review(request, tshirt_id):
   tshirt = Tshirt.objects.get(id=tshirt_id)
-  print(request.POST)
-  review = ReviewForm(request.POST).save(commit=False)
-  review.tshirt = tshirt
-  review.user = request.user
-  review.save()
+  review = ReviewForm(request.POST)
+  if review.is_valid():
+    review.save(commit=False)
+    review.tshirt = tshirt
+    review.user = request.user
+    review.save()
   return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
 @login_required

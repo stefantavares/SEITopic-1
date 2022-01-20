@@ -1,148 +1,228 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    font-family: "Monsterrat", sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    /* background-color: #24252a; */
+  font-family: "Monsterrat", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #f8f9fa;;
   }
 
 main {
-    flex: 1 0 auto;
-    font-family: "Monsterrat", sans-serif;
-    margin: 112px;
+  flex: 1 0 auto;
+  font-family: "Monsterrat", sans-serif;
+  margin: 112px;
 }
 
 /* Navbar styling */
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-    border-bottom: 1px solid #edf0f1;;
-    width: 100%;
-    height: 7%;
-    background-color: #24252a;
-    margin-bottom: 20px;
-    position: fixed;
-    top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+  border-bottom: 1px solid #edf0f1;;
+  width: 100%;
+  height: 7%;
+  background-color: rgb(51, 51, 51);
+  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
 a {
-    font-family: "Monsterrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #edf0f1;
-    text-decoration: none;
+  font-family: "Monsterrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
 }
 
 .logo {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #nav-logo, #logo-link {
-    color: #edf0f1;
-    font-size: 20px;
+  color: #edf0f1;
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-links > li {
-    display: inline-block;
-    padding: 0px 20px;
+  display: inline-block;
+  padding: 0px 20px;
 }
 
 .nav-links > li > a {
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    font-size: 13px;
-    color: rgba(0, 136, 169, 1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  font-size: 13px;
+  color: #edf0f1;
 }
 
 .nav-links > li > a:hover {
-    color: #edf0f1;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 5px 12px 5px 12px;
+  color: #edf0f1;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 12px 5px 12px;
 }
 
 .login-button {
-    padding: 9px 25px;
-    background-color: rgba(0, 136, 169, 1);
-    border-radius: 8px;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 400;
-    margin: 0px 6px 0px 6px;
+  padding: 6px 20px;
+  background-color: #edf0f1;
+  color: black;
+  border-radius: 8px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px 6px 0px 6px;
 }
 
 .login-button:hover {
-    color: black;
-    background-color: #edf0f1;
+  color: #edf0f1;
+  border: 1px solid #edf0f1;
+  background-color: rgb(51, 51, 51);
 }
 
 #orders-icon {
-    color: #edf0f1;
+  color: #edf0f1;
+}
+
+/* Button styling */
+
+.btn-style-1 {
+  padding: 9px 25px;
+  background-color: rgb(22, 22, 22);
+  color: #edf0f1;
+  border: 1px solid rgb(22, 22, 22);
+  border-radius: 8px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px 6px 0px 6px;
+}
+
+.btn-style-1:hover {
+  background-color: white;
+  color: rgb(22, 22, 22);
+  border: 1px solid rgb(22, 22, 22);
+  padding: 9px 28px 9px 28px;
+}
+
+.btn-style-2 {
+  padding: 9px 25px;
+  background-color: rgb(207, 16, 16);
+  color: #edf0f1;
+  border: 1px solid rgb(207, 16, 16);
+  border-radius: 8px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px 6px 0px 6px;
+  padding: 6px 10px 6px 10px;
+}
+
+.btn-style-2:hover {
+  background-color: white;
+  color: rgb(207, 16, 16);
+  border: 1px solid rgb(207, 16, 16);
+}
+
+#update-btn {
+  padding: 5px 8px 5px 8px;
+  font-size: 10px;
+}
+
+#remove-btn {
+  padding: 5px 8px 5px 8px;
+  font-size: 10px;
+  width: 95px;
 }
 
 /* Footer styling */
 
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 30px 10%; */
-    border-bottom: 1px solid #edf0f1;
-    width: 100%;
-    height: 6%;
-    background-color: #24252a;
-    position: fixed;
-    bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #edf0f1;
+  width: 100%;
+  height: 6%;
+  background-color: rgb(51, 51, 51);
+  position: fixed;
+  bottom: 0;
 }
 
 .footer-icons {
-    color: rgba(0, 136, 169, 1);
-    margin: 0px 12px 0px 12px;
-    font-size: 20px;
-    transition: all 0.3s ease 0s;
+  color: #edf0f1;
+  margin: 0px 12px 0px 12px;
+  font-size: 20px;
+  transition: all 0.3s ease 0s;
 }
 
 .footer-icons:hover {
-    cursor: pointer;
-    color: #edf0f1;
-    font-size: 28px;
+  cursor: pointer;
+  font-size: 28px;
 }
 
+/* Tshirt card styling */
+
 .card-container {
-    border: 2px solid black;
-    border-radius: 7px;
-    width: 200px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  border: 2px solid black;
+  border-radius: 7px;
+  width: 200px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.shirt-price {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.shirt-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 /* Lines added by Chris */
 #logos {
-    height: 100px;
-    width: auto;
+  height: 100px;
+  width: auto;
   }
   
-  #logoRow {
-    height: 50px;
-    width: auto;
-    float: left;
-  ;
-  }
+#logoRow {
+  height: 50px;
+  width: auto;
+  float: left;
+}
 
 #details-container{
   display: flex;
@@ -152,7 +232,8 @@ footer {
 .tshirt-img{
   width:200px;
   height:200px;
-  border:1px solid;
+  border: 1px solid;
+  border-radius: 4px;
 }
 
 .center{
@@ -181,10 +262,6 @@ footer {
   width: 620px;
   justify-content: flex-end;
 }
-
-/* .cart-spacing {
-  margin: 0px 25px 0px 25px;
-} */
 
 .cart-items {
   display: flex;
@@ -233,11 +310,6 @@ footer {
   flex-direction: column;
 }
 
-.quantity-edit {
-  display: flex;
-  justify-content: flex-start;
-}
-
 .username {
   color: rgba(0, 136, 169, 1);
 }
@@ -252,4 +324,56 @@ footer {
 
 label {
   font-weight: 700;
+}
+
+/* Reviews Styling */
+
+#reviews-label {
+  font-weight: 600;
+}
+
+.user-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reviews-remove {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.review-user {
+  font-weight: 600;
+}
+
+.review-rating {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.review-content {
+  font-size: 13px;
+}
+
+/* Details styles */
+
+.shirt-description {
+  font-size: 13px;
+}
+
+.shirt-price {
+  font-weight: 600;
+}
+
+#price-remove {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: 600;
 }
