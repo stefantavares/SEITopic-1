@@ -13,11 +13,18 @@
     <div id="orders-container" style="width:500px;" class="card">
         <div class="card-body">
         {% for order in orders %}
+        <div class="row">
         <div class="flexrow-spc-btwn">
+          <div class="col">  
         <h5>Order #: {{ order.id }}</h5>
-        <a class="btn btn-primary btn-style-1" href="{% url 'order_detail' order.id %}">REVIEW ORDER</a>
-        <a class="btn btn-danger btn-style-2" href="{% url 'cancel_order' order.id %}">CANCEL ORDER</a>
         </div>
+        <div class="col" id="review-cancel">
+        <a class="btn btn-primary btn-style-1 history-btn" href="{% url 'order_detail' order.id %}">REVIEW ORDER</a>
+
+        <a class="btn btn-danger btn-style-2 history-btn"  href="{% url 'cancel_order' order.id %}">CANCEL ORDER</a>
+        </div>
+        </div>
+    </div>
         <hr>
         {% endfor %}
         </div>
