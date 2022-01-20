@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Tshirt, Order, OrderDetail
+from .models import Tshirt, Order, OrderDetail, Review
 from .forms import ProfileForm, OrderDetailForm, ReviewForm
 from datetime import date
 # Create your views here.
@@ -44,8 +44,8 @@ def tshirts_index(request):
 
 def tshirts_detail(request, tshirt_id):
     tshirt = Tshirt.objects.get(id=tshirt_id)
-    review_form = ReviewForm()
-    return render(request, 'tshirts/detail.html', {'tshirt': tshirt, 'review_form': review_form})
+    reviews = tshirt.review_set.all()
+    return render(request, 'tshirts/detail.html', {'tshirt': tshirt, 'reviews': reviews})
 
 def myimages(request):
     image_path = os.path.dirname(os.path.realpath(__file__))
@@ -112,19 +112,23 @@ def show_orders(request):
 @login_required
 def update_quantity(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
-  update_form = OrderDetailForm(request.POST)
-  order_details.order.total_cost += order_details.tshirt.price*(update_form.save(commit=False).quantity - order_details.quantity)
-  order_details.order.save()
-  order_details.quantity = update_form.save(commit=False).quantity
-  order_details.save()
+  if order_details.order.user.user == request.user:
+    update_form = OrderDetailForm(request.POST)
+    order_details.order.total_cost += order_details.tshirt.price*(update_form.save(commit=False).quantity - order_details.quantity)
+    order_details.order.save()
+    order_details.quantity = update_form.save(commit=False).quantity
+    order_details.save()
+    return redirect('show_cart')
   return redirect('show_cart')
 
 @login_required
 def remove_item(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
-  order_details.order.total_cost -= order_details.quantity*order_details.tshirt.price
-  order_details.order.save()
-  order_details.delete()
+  if order_details.order.user.user == request.user:
+    order_details.order.total_cost -= order_details.quantity*order_details.tshirt.price
+    order_details.order.save()
+    order_details.delete()
+    return redirect('show_cart')
   return redirect('show_cart')
 
 @login_required
@@ -136,16 +140,27 @@ def cancel_order(request, order_id):
 @login_required
 def order_detail(request, order_id):
   order = Order.objects.get(id=order_id)
-  order_details = OrderDetail.objects.filter(order = order)
-  return render(request, 'tshirts/orderdetail.html', {'order': order, 'order_details': order_details})
+  if order.user.user == request.user:
+    order_details = OrderDetail.objects.filter(order = order)
+    return render(request, 'tshirts/orderdetail.html', {'order': order, 'order_details': order_details})
+  return redirect('show_orders')
 
 @login_required
 def add_review(request, tshirt_id):
-  tshirt = tshirt_id
+  tshirt = Tshirt.objects.get(id=tshirt_id)
+  print(request.POST)
   review = ReviewForm(request.POST).save(commit=False)
   review.tshirt = tshirt
   review.user = request.user
   review.save()
+  return redirect('tshirts_detail', tshirt_id = tshirt_id)
+
+@login_required
+def remove_review(request, tshirt_id, review_id):
+  review = Review.objects.get(id=review_id)
+  if review.user == request.user:
+    review.delete()
+    return redirect('tshirts_detail', tshirt_id = tshirt_id)
   return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
 
