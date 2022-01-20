@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Tshirt, Order, OrderDetail
-from .forms import ProfileForm, OrderDetailForm
+from .forms import ProfileForm, OrderDetailForm, ReviewForm
 from datetime import date
 # Create your views here.
 def home(request):
@@ -44,10 +44,8 @@ def tshirts_index(request):
 
 def tshirts_detail(request, tshirt_id):
     tshirt = Tshirt.objects.get(id=tshirt_id)
-    form= OrderDetailForm()
-    return render(request, 'tshirts/detail.html', {
-      'tshirt': tshirt, 'form': form
-    })
+    review_form = ReviewForm()
+    return render(request, 'tshirts/detail.html', {'tshirt': tshirt, 'review_form': review_form})
 
 def myimages(request):
     image_path = os.path.dirname(os.path.realpath(__file__))
@@ -124,6 +122,8 @@ def update_quantity(request, order_details_id):
 @login_required
 def remove_item(request, order_details_id):
   order_details = OrderDetail.objects.get(id=order_details_id)
+  order_details.order.total_cost -= order_details.quantity*order_details.tshirt.price
+  order_details.order.save()
   order_details.delete()
   return redirect('show_cart')
 
@@ -132,5 +132,20 @@ def cancel_order(request, order_id):
   order = Order.objects.get(id=order_id)
   order.delete()
   return redirect('show_orders')
+
+@login_required
+def order_detail(request, order_id):
+  order = Order.objects.get(id=order_id)
+  order_details = OrderDetail.objects.filter(order = order)
+  return render(request, 'tshirts/orderdetail.html', {'order': order, 'order_details': order_details})
+
+@login_required
+def add_review(request, tshirt_id):
+  tshirt = tshirt_id
+  review = ReviewForm(request.POST).save(commit=False)
+  review.tshirt = tshirt
+  review.user = request.user
+  review.save()
+  return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
 

@@ -2,6 +2,7 @@ from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -9,6 +10,7 @@ class Tshirt(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=4, decimal_places=2)
+    image_url = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -33,4 +35,10 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     quantity = models.IntegerField(default=1)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    tshirt = models.ForeignKey(Tshirt, on_delete=models.CASCADE)
+
+class Review(models.Model):
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    review_text = models.TextField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tshirt = models.ForeignKey(Tshirt, on_delete=models.CASCADE)
