@@ -12,11 +12,14 @@
     <div class="row clearfix">
         {% for tshirt in tshirts %}
         <div class="col">
-        <div class="card" style="height: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ tshirt.name }}</h5>
-                <p class="card-text">${{ tshirt.price }}</p>
-                <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary">Details</a>
+        <div class="card">
+            <div class="card-body center-column">
+                <h6 class="card-title">{{ tshirt.name }}</h6>
+                <div class="shirt-container">
+                    <img src="{{ tshirt.image_url }}" alt="" style="height:140px;">
+                </div>
+                <p class="card-text shirt-price">${{ tshirt.price }}</p>
+                <a href="{% url 'tshirts_detail' tshirt.id %}" class="btn btn-primary btn-style-1">DETAILS</a>
             </div>
         </div>
     </div>

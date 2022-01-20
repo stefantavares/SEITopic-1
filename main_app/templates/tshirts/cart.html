@@ -12,29 +12,32 @@
             <div class="card center" style= "width:700px;">
                 <div class="card-body" id="orders-card">
                     {% for tshirt in order_details %}
-                    
+                    <div class="row">
                     <div class="flex-row">
                         <div class="cart-items">
-                            <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
-                            <div class="quantity">
+                            <div class="col">
+                            <p class="card-text cart-spacing item-name">{{ tshirt.tshirt.name }}</p>
+                            </div>
+                            <div class="quantity col">
                             <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
-                            <div>
-                                <div class="quantit-edit">
+                            <div >
+                                <div>
                                 <form action="{% url 'update_quantity' tshirt.id %}" method="POST">
                                     {% csrf_token %}
                                     <input type="number" name="quantity" value="{{ tshirt.quantity }}" required class="quantity-input">
-                                    <input type="submit" class="btn btn-sm btn-primary" value="Update">
+                                    <input type="submit" class="btn btn-sm btn-primary btn-style-1" value="UPDATE" id="update-btn">
                                 </form>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="col" id="price-remove">
                             <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
-                            <a href="{% url 'remove_item' tshirt.id %}" class="btn btn-sm btn-danger" >Remove Item</a>
+                            <a href="{% url 'remove_item' tshirt.id %}" class="btn btn-sm btn-danger btn-style-2" id="remove-btn">REMOVE ITEM</a>
                         </div>
                         </div>
                     </div>
-                    <hr>
+                </div>
+                <hr>
                     {% endfor %}
                     <h5 class="total-container">Total: ${{ order.total_cost }}</h5>
                     <hr>
@@ -43,12 +46,13 @@
                     <p>City: {{ order.user.city }}</p>
                     <p>State: {{ order.user.state }}</p>
                     <p>Zipcode: {{ order.user.zipcode }}</p>
+                    <hr>
                     
                     <form action="{% url 'complete_order' %}" method="POST">
                         {% csrf_token %}
-                        <p class="total-container"><button class="btn btn-primary" type="submit">Complete order</button></p>    
+                        <p class="total-container"><button class="btn btn-primary btn-style-1" type="submit">COMPLETE ORDER</button></p>    
                     </form>
-                    <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary">Return to T Shirts</a></p>
+                    <p class="total-container"><a href="{% url 'tshirts_index' %}" class="btn btn-primary btn-style-1" >RETURN TO T SHIRTS</a></p>
                 </div>
             </div>
         </div>
