@@ -1,1 +1,1 @@
-web: gunicorn SEITopic.wsgi.application
+web: gunicorn SEITopic.wsgi
