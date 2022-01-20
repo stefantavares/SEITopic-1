@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
+    font-family: "Monsterrat", sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -35,7 +36,7 @@ header {
     top: 0;
 }
 
-li, a {
+a {
     font-family: "Monsterrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -97,10 +98,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 10%;
+    /* padding: 30px 10%; */
     border-bottom: 1px solid #edf0f1;
     width: 100%;
-    height: 4%;
+    height: 6%;
     background-color: #24252a;
     position: fixed;
     bottom: 0;
@@ -243,4 +244,12 @@ footer {
 
 .display-message {
   margin: 50px 0px 0px 0px;
+}
+
+.signup-container {
+  width: 500px;
+}
+
+label {
+  font-weight: 700;
 }
