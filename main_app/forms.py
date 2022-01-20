@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import OrderDetail, Profile
+from .models import OrderDetail, Profile, Review
 
 class ProfileForm(ModelForm):
   class Meta:
@@ -8,5 +8,10 @@ class ProfileForm(ModelForm):
 
 class OrderDetailForm(ModelForm):
   class Meta:
-    model= OrderDetail
+    model = OrderDetail
     fields=['quantity']
+
+class ReviewForm(ModelForm):
+  class Meta:
+    model = Review
+    fields = ['rating', 'review_text']
