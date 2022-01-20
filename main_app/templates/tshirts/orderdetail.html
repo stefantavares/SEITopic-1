@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>SEITopic Order Detail</title>
+{% endblock %}
+
+{% block content%}
+<h1>Order #{{ order.id }} </h1>
+<hr>
+<div class="container" id="details-container">
+            <div class="card center" style= "width:700px;">
+                <div class="card-body" id="orders-card">
+                    {% for tshirt in order_details %}                  
+                    <div class="flex-row">
+                        <div class="cart-items">
+                            <p class="card-text cart-spacing">{{ tshirt.tshirt.name }}</p>
+                            <p class="card-text cart-spacing">Quantity: {{ tshirt.quantity }}</p>
+                            <p class="card-text cart-spacing">${{ tshirt.tshirt.price }} each</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    <h5 class="total-container">Total: ${{ order.total_cost }}</h5>
+                    <hr>
+                    <p class="total-container"><a href="{% url 'show_orders' %}" class="btn btn-primary">Return to Order History</a></p>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
