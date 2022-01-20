@@ -38,7 +38,11 @@
                     {% endfor %}
                     <h5 class="total-container">Total: ${{ order.total_cost }}</h5>
                     <hr>
-
+                    <h4>Shipping Address</h4>
+                    <p>Street Address: {{ order.user.street_address }}</p>
+                    <p>City: {{ order.user.city }}</p>
+                    <p>State: {{ order.user.state }}</p>
+                    <p>Zipcode: {{ order.user.zipcode }}</p>
                     
                     <form action="{% url 'complete_order' %}" method="POST">
                         {% csrf_token %}
