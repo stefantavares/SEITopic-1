@@ -1,12 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Log In</h1>
-
-<form action="{% url 'login' %}" method="POST">
+<hr>
+<!-- <form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Login" class="btn-dark">
     <input type="hidden" name="next" value="{{ next }}">
+</form> -->
+<div class="signup-container">
+<form action="/accounts/login/" method="POST">
+    {% csrf_token %}
+    <p>
+    <div class="mb-3">
+    <label class="form-label" for="id_username">Username:</label>
+    <input class="form-control" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+    </div>
+    
+  </p>
+
+  
+  <p>
+    <div class="mb-3">
+    <label class="form-label" for="id_password">Password:</label>
+    <input class="form-control" type="password" name="password" autocomplete="current-password" required="" id="id_password">
+    </div>
+    
+      
+    
+  </p>
+    <input type="submit" value="Login" class="btn-primary btn">
+    <input type="hidden" name="next" value="">
 </form>
+</div>
 
 {% endblock %}

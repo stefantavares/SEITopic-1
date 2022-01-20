@@ -1,16 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Sign Up</h1>
-
+<hr>
 {% if error_message %}
 <p>{{ error_message }}</p>
 {% endif %}
+<div class="signup-container">
 
-<form action="{% url 'signup' %}" method="POST">
+<form action="/accounts/signup/" method="POST">
+
     {% csrf_token %}
-    {{ form.as_p }}
-    {{ profile_form.as_p }}
-    <input type="submit" value="Sign Up" class="btn-dark">
-</form>
+    <p>
+    <div class="mb-3">
+    <label class="form-label" for="id_username">Username:</label>
+    <input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+    </div>
+    
+      <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>  
+  </p>
 
+  <p>
+    <div class="mb-3">
+    <label class="form-label" for="id_password1">Password:</label>
+    <input class="form-control" type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+    
+      <span class="helptext"></span></p><ul><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul>
+      </div>
+    <p></p>
+
+  
+  <p>
+    <div class="mb-3">
+    <label  class="form-label" for="id_password2">Password confirmation:</label>
+    <input class="form-control" type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+    
+      <span class="helptext">Enter the same password as before, for verification.</span>
+        </div>
+  </p>
+    <p>   
+    <div class="mb-3">
+    <label  class="form-label" for="id_street_address">Street address:</label>
+    <input class="form-control" type="text" name="street_address" maxlength="20" required="" id="id_street_address">
+    </div>
+  </p>
+
+  <p>
+    <div class="mb-3">
+    <label  class="form-label" for="id_city">City:</label>
+    <input class="form-control" type="text" name="city" maxlength="20" required="" id="id_city">
+    </div>
+  </p>
+ 
+  <p>
+    <div class="mb-3">
+    <label  class="form-label" for="id_state">State:</label>
+    <input class="form-control" type="text" name="state" maxlength="2" required="" id="id_state">
+    </div>
+  </p>
+ 
+  <p>
+    <div class="mb-3">        
+    <label  class="form-label" for="id_zipcode">Zipcode:</label>
+    <input class="form-control" type="number" name="zipcode" required="" max="99999" rid="id_zipcode">
+  </p>
+    <input type="submit" value="Sign Up" class="btn-primary btn">
+    </div>
+</form>
+</div>
 {% endblock %}
