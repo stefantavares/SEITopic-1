@@ -24,6 +24,12 @@ class Profile(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=2)
     zipcode = models.IntegerField()
+    
+    def item_in_cart(self):
+        if self.order_set.filter(complete=False).count():
+            cart = self.order_set.get(complete=False)
+            return cart.orderdetail_set.all().count()
+        return False
 
 class Order(models.Model):
     total_cost= models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -31,6 +37,7 @@ class Order(models.Model):
     complete = models.BooleanField(default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tshirts = models.ManyToManyField(Tshirt, through='OrderDetail')
+
 
 class OrderDetail(models.Model):
     quantity = models.IntegerField(default=1)

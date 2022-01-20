@@ -23,7 +23,11 @@
                 <li class="nav-link"><a href="{% url 'tshirts_index' %}">T Shirts</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-link"><a href="{% url 'show_orders' %}">Order History</a></li>
+                {% if request.user.profile.item_in_cart %}
+                <li class="nav-link"><a href="{% url 'show_cart' %}">Shopping Cart &nbsp;<i class="far fa-shopping-cart"></i> &nbsp;<i class="fas fa-check-circle" id="cart-circle"></i></a></li>
+                {% else %}
                 <li class="nav-link"><a href="{% url 'show_cart' %}">Shopping Cart &nbsp;<i class="far fa-shopping-cart"></i></a></li>
+                {% endif %}
                 {% endif %}
             </ul>
         </nav>
