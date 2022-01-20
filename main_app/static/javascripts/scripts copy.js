@@ -1,4 +1,4 @@
-const imagesDatabase = "http://127.0.0.1:8000/myimages";
+const imagesDatabase = "myimages";
 var images = '';
 
 
@@ -7,7 +7,6 @@ var images = '';
             }).then(data=> {
             
             data.forEach(pic => {
-            // images+=`<img src='http://localhost:8000/static/images/logos/${pic}' height=50 width=auto>`;
             images+=`<img src='/static/images/logos/${pic}' height=50 width=auto>`;
             });
             document.getElementById("logoRow").innerHTML = images;
