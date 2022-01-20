@@ -68,7 +68,7 @@
                     <p class="review-content">{{ review.review_text }}</p>
                     {% if review.user == request.user %}
                     <div class="reviews-remove">
-                    <a href="{% url 'remove_review' tshirt.id review.id%}" class="btn btn-sm btn-danger btn-style-2">DELETE</a>
+                    <a href="{% url 'remove_review' tshirt.id review.id%}" class="btn btn-sm btn-danger btn-style-2" id="delete-btn">DELETE</a>
                     </div>
                     <hr>
                     {% endif %}

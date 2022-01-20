@@ -15,8 +15,8 @@
         {% for order in orders %}
         <div class="flexrow-spc-btwn">
         <h5>Order #: {{ order.id }}</h5>
-        <a class="btn btn-primary" href="{% url 'order_detail' order.id %}">Review Order</a>
-        <a class="btn btn-danger" href="{% url 'cancel_order' order.id %}">Cancel Order</a>
+        <a class="btn btn-primary btn-style-1" href="{% url 'order_detail' order.id %}">REVIEW ORDER</a>
+        <a class="btn btn-danger btn-style-2" href="{% url 'cancel_order' order.id %}">CANCEL ORDER</a>
         </div>
         <hr>
         {% endfor %}
