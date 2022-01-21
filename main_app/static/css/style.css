@@ -216,6 +216,10 @@ footer {
   justify-content: space-evenly;
 }
 
+.card {
+  margin-top: 10px;
+}
+
 .card-title {
   font-size: 18px;
   font-weight: 600;
