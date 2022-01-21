@@ -157,12 +157,10 @@ def order_detail(request, order_id):
 @login_required
 def add_review(request, tshirt_id):
   tshirt = Tshirt.objects.get(id=tshirt_id)
-  review = ReviewForm(request.POST)
-  if review.is_valid():
-    review.save(commit=False)
-    review.tshirt = tshirt
-    review.user = request.user
-    review.save()
+  review = ReviewForm(request.POST).save(commit=False)
+  review.tshirt = tshirt
+  review.user = request.user
+  review.save()
   return redirect('tshirts_detail', tshirt_id = tshirt_id)
 
 @login_required
