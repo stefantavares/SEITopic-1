@@ -158,6 +158,9 @@ a {
   padding: 5px 8px 5px 8px;
   font-size: 10px;
   width: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #delete-btn {
   font-size: 9px;
